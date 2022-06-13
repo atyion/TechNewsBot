@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-tree = ET.parse(r"C:\Users\andre\PycharmProjects\feedgram\test.xml")
+tree = ET.parse(r"path")
 root = tree.getroot()
 for item in root.findall('item'):
     title = item.find('title').text

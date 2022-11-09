@@ -23,7 +23,8 @@ def start_command(message):
     bot.send_message(message.chat.id, "Hi! Since now I'll send you the lastes news about tech! \nIf you don't want more news write me /stop!")
     if message.chat.id not in users:
         with open('chatid.txt', 'a') as file:
-            file.write(str(message.chat.id))
+            users.append(str(message.chat.id)+'\n')
+            file.write(str(message.chat.id)+"\n")
         print(message.chat.id)
 
 
@@ -31,9 +32,27 @@ def start_command(message):
 @bot.message_handler(commands=(['update']))
 def update_command(message):
     global oldnews
-    if(parser()[3]!=oldnews):
+    with open("news.txt",'r+') as file:
+        oldnews = file.readline()
+    if(parser()[0]!=oldnews):
         print("Sending news...\n")
         for i in range(len(users)):
             bot.send_message(users[i], "<b>"+parser()[0]+"</b>"+"\n"+"<em>"+parser()[1]+"</em>"+"\n\n"+"<a href='"+parser()[2]+"'>Read more about it</a>", parse_mode= 'HTML')
-            oldnews = parser()[3]
+            with open("news.txt",'r+') as file:
+                file.truncate(0)
+                file.write(parser()[0])
+
+#Stop Command
+@bot.message_handler(commands=['stop'])
+def stop_command(message):
+    if str(message.chat.id)+"\n" in users:
+        users.pop(users.index(str(message.chat.id)+"\n"))
+        bot.send_message(message.chat.id, "We won't send you more news! \n If you want to restart the bot, write /start")
+        print(message.chat.id, "removed")
+        with open("chatid.txt",'r+') as file:
+                file.truncate(0)
+                for i in range(len(users)):
+                    file.write(users[i]+"\n")
+    else:
+        bot.send_message(message.chat.id, "Already stopped!")
 bot.infinity_polling()

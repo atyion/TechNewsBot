@@ -44,7 +44,7 @@ def update_command(message):
         lenn = len(users)
         for i in range(lenn):
             bot.send_message(users[i], "<b>"+parser()[0]+"</b>"+"\n"+"<em>"+parser()[1]+"</em>"+"\n\n"+"<a href='"+parser()[2]+"'>Read more about it</a>", parse_mode= 'HTML')
-            print("sent ", i, "/",lenn)
+            print("sent ", i+1, "/",lenn)
             with open("news.txt",'r+') as file:
                 file.truncate(0)
                 file.write(parser()[0])

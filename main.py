@@ -21,12 +21,14 @@ print(users)
 @bot.message_handler(commands=['start'])
 def start_command(message):
     global oldnews
-    bot.send_message(message.chat.id, "Hi! Since now I'll send you the lastes news about tech! \nIf you don't want more news write me /stop!")
     if str(message.chat.id)+"\n" not in users:
+        bot.send_message(message.chat.id, "Hi! Since now I'll send you the lastes news about tech! \nIf you don't want more news write me /stop!")
         with open('chatid.txt', 'a') as file:
             users.append(str(message.chat.id)+'\n')
             file.write(str(message.chat.id)+"\n")
         print(message.chat.id)
+    else:
+        bot.send_message(message.chat.id, "Already started!")
 
 
 #Update command

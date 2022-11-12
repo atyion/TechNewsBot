@@ -50,7 +50,7 @@ def update_command(message):
 def stop_command(message):
     if str(message.chat.id)+"\n" in users:
         users.pop(users.index(str(message.chat.id)+"\n"))
-        bot.send_message(message.chat.id, "We won't send you more news! \n If you want to restart the bot, write /start")
+        bot.send_message(message.chat.id, "We won't send you more news! \nIf you want to restart the bot, write /start")
         print(message.chat.id, "removed")
         with open("chatid.txt",'r+') as file:
                 file.truncate(0)

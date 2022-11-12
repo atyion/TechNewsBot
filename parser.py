@@ -24,6 +24,6 @@ parser()[2] ==> link
 
 parser()[3] ==> date
 
-THE LAST ARTICOLE!
+THE LAST ARTICLE!
 
 '''

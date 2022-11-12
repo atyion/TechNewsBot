@@ -2,11 +2,6 @@ from parser import *
 import time
 from config import api
 import telebot
-from parser import *
-import time
-from config import api
-import telebot
-from multiprocessing import Process
 
 print("Starting bot...\n")
 
@@ -22,7 +17,7 @@ print(users)
 def start_command(message):
     global oldnews
     if str(message.chat.id)+"\n" not in users:
-        bot.send_message(message.chat.id, "Hi! Since now I'll send you the lastes news about tech! \nIf you don't want more news write me /stop!")
+        bot.send_message(message.chat.id, "Hi! From now I'll send you the lastes news about tech! \nIf you don't want more news write me /stop!")
         with open('chatid.txt', 'a') as file:
             users.append(str(message.chat.id)+'\n')
             file.write(str(message.chat.id)+"\n")

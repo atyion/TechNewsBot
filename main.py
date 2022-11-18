@@ -29,20 +29,35 @@ def start_command(message):
 #Update command
 @bot.message_handler(commands=['update'])
 def update_command(message):
-    time.sleep(5)
-    print("entering...\n")
     global oldnews
     with open("news.txt",'r+') as file:
         oldnews = file.readline()
+        
     if(parser()[0]!=oldnews):
         print("Sending news...\n")
         lenn = len(users)
         for i in range(lenn):
-            bot.send_message(users[i], "<b>"+parser()[0]+"</b>"+"\n"+"<em>"+parser()[1]+"</em>"+"\n\n"+"<a href='"+parser()[2]+"'>Read more about it</a>", parse_mode= 'HTML')
-            print("sent ", i+1, "/",lenn)
-            with open("news.txt",'r+') as file:
-                file.truncate(0)
-                file.write(parser()[0])
+            try:
+                bot.send_message(users[i], "<b>"+parser()[0]+"</b>"+"\n"+"<em>"+parser()[1]+"</em>"+"\n\n"+"<a href='"+parser()[2]+"'>Read more about it</a>", parse_mode= 'HTML')
+                print("sent ", i+1, "/",lenn)
+                with open("news.txt",'r+') as file:
+                    file.truncate(0)
+                    file.write(parser()[0])
+            except:
+                print("user blocked...")
+                stopblock(users[i])
+
+def stopblock(userid):
+    
+    if str(userid)+"\n" in users:
+            users.pop(users.index(str(userid)+"\n"))
+            print(userid, "removed")
+            with open("chatid.txt",'r+') as file:
+                    file.truncate(0)
+                    for i in range(len(users)):
+                        file.write(users[i]+"\n")
+        else:
+            bot.send_message(message.chat.id, "Already stopped!")
 
 
 #Stop Command

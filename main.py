@@ -22,8 +22,7 @@ def start_command(message):
             users.append(str(message.chat.id)+'\n')
             file.write(str(message.chat.id)+"\n")
         print(message.chat.id)
-    else:
-        bot.send_message(message.chat.id, "Already started!")
+
 
 
 #Update command

@@ -56,8 +56,8 @@ def stopblock(userid):
                     file.truncate(0)
                     for i in range(len(users)):
                         file.write(users[i]+"\n")
-        else:
-            bot.send_message(message.chat.id, "Already stopped!")
+    else:
+        bot.send_message(message.chat.id, "Already stopped!")
 
 
 #Stop Command

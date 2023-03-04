@@ -1,4 +1,6 @@
 from parsernews import *
+import threading
+import datetime
 import time
 from config import api
 import telebot
@@ -11,7 +13,14 @@ with open('chatid.txt') as f:
 oldnews = ""
 print(users)
 
-
+def message_timer():
+    tempo = -1
+    while True:
+        if datetime.datetime.now().minute%2 == 0 and datetime.datetime.now().minute != tempo:
+            tempo = datetime.datetime.now().minute
+            print("ciao")
+            update_command("ciao")
+     
 #Start command   
 @bot.message_handler(commands=['start'])
 def start_command(message):
@@ -26,7 +35,7 @@ def start_command(message):
 
 
 #Update command
-@bot.message_handler(commands=['update'])
+#@bot.message_handler(commands=['update'])
 def update_command(message):
     global oldnews
     with open("news.txt",'r+') as file:
@@ -72,4 +81,10 @@ def stop_command(message):
     else:
         bot.send_message(message.chat.id, "Already stopped!")
 
-bot.infinity_polling()
+def bott():
+    bot.infinity_polling()
+x = threading.Thread(target=message_timer)
+y = threading.Thread(target=bott)
+y.start()
+x.start()
+

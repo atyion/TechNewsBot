@@ -1,6 +1,6 @@
 from parsernews import *
 import threading
-import datetime
+#import datetime
 import time
 from config import api
 import telebot
@@ -14,12 +14,14 @@ oldnews = ""
 print(users)
 
 def message_timer():
-    tempo = -1
     while True:
-        if datetime.datetime.now().minute%2 == 0 and datetime.datetime.now().minute != tempo:
-            tempo = datetime.datetime.now().minute
-            print("ciao")
-            update_command("ciao")
+        #if datetime.datetime.now().minute%2 == 0 and datetime.datetime.now().minute != tempo:
+        #tempo = datetime.datetime.now().minute
+        #
+        #
+        # EVERY 500 SECONDS
+        time.sleep(500)
+        update_command()
      
 #Start command   
 @bot.message_handler(commands=['start'])
@@ -36,7 +38,7 @@ def start_command(message):
 
 #Update command
 #@bot.message_handler(commands=['update'])
-def update_command(message):
+def update_command():
     global oldnews
     with open("news.txt",'r+') as file:
         oldnews = file.readline()

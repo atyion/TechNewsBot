@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 
 def parser():
     #read_input = input("Give me the rss's link: ") #Get in input rss's link
-    url = urlopen('https://feeds.a.dj.com/rss/RSSWSJD.xml') #Using urlopen to read link
+    url = urlopen('https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml') #Using urlopen to read link
     tree = ET.parse(url) #Using xml.etree.ElementTree to parse che xml file
     root = tree.getroot() #Using getroot to get the root of the xml file
     #print(root.tag)
